@@ -1,0 +1,28 @@
+# Configuração do MySQL de produção do RangoJá
+[mysqld]
+# O banco só escuta dentro do servidor: acesso externo somente via SSH
+bind-address        = 127.0.0.1
+mysqlx              = OFF
+
+character-set-server = utf8mb4
+collation-server     = utf8mb4_0900_ai_ci
+
+# Pasta autorizada para LOAD DATA / SELECT ... INTO OUTFILE (Aula 2)
+secure_file_priv    = /dados
+
+# Logs (Aula 4)
+log_error           = /var/log/mysql/error.log
+slow_query_log      = ON
+slow_query_log_file = /var/log/mysql/slow.log
+long_query_time     = 1
+general_log         = OFF
+general_log_file    = /var/log/mysql/general.log
+server_id           = 1
+log_bin             = /var/log/mysql/mysql-bin
+binlog_expire_logs_seconds = 604800
+
+# Agendador de eventos (Aula 5)
+event_scheduler     = ON
+
+# Servidor de aula: memória modesta
+innodb_buffer_pool_size = 256M

@@ -1,0 +1,16 @@
+services:
+  servidor:
+    build: ./servidor
+    image: rangoja-prod-db01
+    container_name: rangoja-prod
+    hostname: rangoja-prod-db01
+    ports:
+      - "2222:22"
+    volumes:
+      - mysql-dados:/var/lib/mysql
+      - ./banco:/opt/rangoja/banco:ro
+      - ./aulas:/opt/rangoja/aulas:ro
+    restart: unless-stopped
+
+volumes:
+  mysql-dados:
