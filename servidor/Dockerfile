@@ -24,9 +24,14 @@ COPY motd         /etc/motd
 COPY aula         /usr/local/bin/aula
 COPY entrypoint.sh /entrypoint.sh
 
+# Remove finais de linha do Windows (CRLF), caso o Git tenha convertido os arquivos
+RUN sed -i 's/\r$//' /usr/local/bin/aula /entrypoint.sh /etc/motd \
+        /etc/mysql/mysql.conf.d/zz-rangoja.cnf /home/dba/.my.cnf
+
 RUN chown dba:dba /home/dba/.my.cnf && chmod 600 /home/dba/.my.cnf \
     && chmod +x /usr/local/bin/aula /entrypoint.sh \
     && rm -f /etc/update-motd.d/* \
+    && echo 'LANG=C.UTF-8' >> /etc/environment \
     && sed -i 's/^#\?PasswordAuthentication .*/PasswordAuthentication yes/' /etc/ssh/sshd_config \
     && sed -i 's/^#\?PermitRootLogin .*/PermitRootLogin no/' /etc/ssh/sshd_config \
     && ssh-keygen -A \

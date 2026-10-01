@@ -1,0 +1,7 @@
+# Scripts e configurações rodam dentro do Linux: sempre com final de linha LF,
+# mesmo quando o repositório é clonado no Windows.
+*               text=auto eol=lf
+servidor/aula   text eol=lf
+*.sh            text eol=lf
+*.sql           text eol=lf
+*.cnf           text eol=lf

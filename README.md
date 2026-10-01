@@ -20,8 +20,8 @@ servidor de produção da empresa para você repetir tudo o que foi feito nas au
 ## Subindo o servidor
 
 ```bash
-git clone <url-deste-repositorio> rangoja-dba
-cd rangoja-dba
+git clone https://github.com/joaocarloslima/adb
+cd adb
 docker compose up -d --build
 docker compose logs -f        # aguarde "Servidor pronto" e saia com Ctrl+C
 ```
@@ -54,7 +54,25 @@ docker compose exec servidor aula 1     # troque pelo número da aula
 ```
 
 O comando recria o banco do zero, então tudo o que foi feito antes é perdido.
-Os comandos usados em cada aula estão em `aulas/aulaNN/gabarito.sql`.
+
+Cada aula tem um guia para repetir em casa, com os comandos e o resultado esperado:
+
+| Aula | Guia |
+|------|------|
+| 1 | [Primeiro dia como DBA](aulas/aula01/README.md) |
+
+Os comandos de cada aula, na ordem, também estão em `aulas/aulaNN/gabarito.sql`.
+
+## Atualizando para uma nova aula
+
+Na pasta do repositório:
+
+```bash
+git pull
+docker compose exec servidor aula 2     # número da aula
+```
+
+Não é preciso reconstruir a imagem: as aulas novas chegam pelo `git pull`.
 
 ## Problemas comuns
 
@@ -63,5 +81,11 @@ do servidor mudou. Rode `ssh-keygen -R "[localhost]:2222"` e conecte de novo.
 
 **Porta 2222 em uso:** troque a porta em `docker-compose.yml` (por exemplo `"2200:22"`)
 e conecte com `-p 2200`.
+
+**`/entrypoint.sh: no such file or directory` ou `bad interpreter` (Windows):** o Git converteu
+os finais de linha. Rode `git config --global core.autocrlf input`, apague a pasta, clone de novo
+e suba com `docker compose up -d --build`.
+
+**Acentos estranhos no terminal (`Ot�vio`):** imagem antiga. Rode `docker compose up -d --build`.
 
 **Começar tudo do zero:** `docker compose down -v` apaga o volume com os dados.

@@ -26,3 +26,7 @@ event_scheduler     = ON
 
 # Servidor de aula: memória modesta
 innodb_buffer_pool_size = 256M
+
+# Clientes (mysql, mysqldump) sempre em UTF-8, mesmo em sessão SSH sem locale
+[client]
+default-character-set = utf8mb4
