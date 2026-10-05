@@ -61,6 +61,7 @@ Cada aula tem um guia para repetir em casa, com os comandos e o resultado espera
 |------|------|
 | 1 | [Primeiro dia como DBA](aulas/aula01/README.md) |
 | 2 | [O banco sumiu!](aulas/aula02/README.md) |
+| 3 | [A consulta lenta](aulas/aula03/README.md) |
 
 Os comandos de cada aula, na ordem, também estão em `aulas/aulaNN/gabarito.sql`.
 
