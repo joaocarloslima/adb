@@ -6,7 +6,7 @@ ENV DEBIAN_FRONTEND=noninteractive \
     LANG=C.UTF-8
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
-        mysql-server mysql-client openssh-server sudo tzdata \
+        mysql-server mysql-client openssh-server sudo tzdata cron \
         gzip less nano vim-tiny procps htop \
     && rm -rf /var/lib/apt/lists/* \
     && ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
@@ -35,6 +35,7 @@ RUN chown dba:dba /home/dba/.my.cnf && chmod 600 /home/dba/.my.cnf \
     && sed -i 's/^#\?PasswordAuthentication .*/PasswordAuthentication yes/' /etc/ssh/sshd_config \
     && sed -i 's/^#\?PermitRootLogin .*/PermitRootLogin no/' /etc/ssh/sshd_config \
     && ssh-keygen -A \
+    && sed -i '/pam_loginuid/s/^/#/' /etc/pam.d/cron \
     && echo 'export PS1="\[\e[1;31m\]\u@\h\[\e[0m\]:\[\e[1;34m\]\w\[\e[0m\]\$ "' >> /home/dba/.bashrc
 
 EXPOSE 22

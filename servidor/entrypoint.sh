@@ -38,6 +38,10 @@ fi
 # Desliga o MySQL com segurança quando o container for parado
 trap 'echo "[rangoja] Desligando..."; mysqladmin -uroot shutdown; kill $SSHD_PID 2>/dev/null; exit 0' TERM INT
 
+# Agendador do sistema (usado no backup automático da Aula 5)
+rm -f /var/run/crond.pid
+cron
+
 /usr/sbin/sshd -D -e &
 SSHD_PID=$!
 

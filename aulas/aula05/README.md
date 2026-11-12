@@ -19,11 +19,12 @@ No seu computador, dentro da pasta do repositório:
 
 ```bash
 git pull
+docker compose up -d --build
 docker compose exec servidor aula 5
 ```
 
-Espere aparecer `[aula] Pronto.` Na primeira vez, o cenário instala o `cron` (o agendador do
-Linux), então o servidor precisa de internet.
+O `--build` atualiza o servidor com o `cron`, o agendador do Linux usado no passo 5. Os dados do
+banco continuam. Espere aparecer `[aula] Pronto.`
 
 ## 1. Uma view para o marketing
 
